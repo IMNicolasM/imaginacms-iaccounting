@@ -43,6 +43,19 @@ class EloquentProviderRepository extends EloquentCrudRepository implements Provi
       $query->where('created_by', $userId);
     }
 
+    //add filter by search
+    if (isset($filter->search)) {
+      //find search in columns
+      $query->where(function ($query) use ($filter) {
+        $query->where('id', 'like', '%' . $filter->search . '%')
+          ->orWhere('name', 'like', '%' . $filter->search . '%')
+          ->orWhere('lastname', 'like', '%' . $filter->search . '%')
+          ->orWhere('identification', 'like', '%' . $filter->search . '%')
+          ->orWhere('updated_at', 'like', '%' . $filter->search . '%')
+          ->orWhere('created_at', 'like', '%' . $filter->search . '%');
+      });
+    }
+
     //Response
     return $query;
   }

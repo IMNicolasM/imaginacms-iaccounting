@@ -11,7 +11,7 @@ return [
   'title' => [
     'uploadDocument' => 'Sube tu Documento para Analizar',
     'verifyDocument' => 'Verifica tu Documento',
-    'infoDocument' => 'Información de tu documento',
+    'infoDocument' => 'Información del Documento',
     'updateProvider' => 'Actualizar Proveedor',
     'newProvider' => 'Nuevo Proveedor',
     'newAccountingAccount' => 'Nueva Cuenta Contable',
@@ -20,8 +20,12 @@ return [
     'updateMapping' => 'Actualizar Mapeo',
     'newOrigin' => 'Nuevo Origen',
     'updateOrigin' => 'Actualizar Origen',
+    'resendDocument' => 'Reenviar Documento',
+    'logResponse' => 'Respuestas',
+    'viewLog' => 'Ver Log',
   ],
   'button' => [
+    'retry' => 'Reintentar',
   ],
   'table' => [
   ],
@@ -42,7 +46,8 @@ return [
     'failed' => 'Fallido',
     'pending' => 'Pendiente',
     'sending' => 'Enviado',
-    'account' => 'Cuenta Contable'
+    'account' => 'Cuenta Contable',
+    'taxPercentage' => 'Porcentaje de IVA'
   ],
   'form' => [
     'elaborationDate' => 'Fecha de elaboración',

@@ -11,7 +11,7 @@ return [
   'title' => [
     'analyzeDocument' => 'Upload Your Document for Analysis',
     'verifyDocument' => 'Verify Your Document',
-    'infoDocument' => 'Your Document Info',
+    'infoDocument' => 'Document Information',
     'updateProvider' => 'Update Provider',
     'newProvider' => 'New Provider',
     'newAccountingAccount' => 'New Accounting Account',
@@ -20,8 +20,12 @@ return [
     'updateMapping' => 'Update Mapping',
     'newOrigin' => 'New Origin',
     'updateOrigin' => 'Update Origin',
+    'resendDocument' => 'Resend Document',
+    'logResponse' => 'Log Response',
+    'viewLog' => 'View Log',
   ],
   'button' => [
+    'retry' => 'Try Again',
   ],
   'table' => [
   ],
@@ -42,7 +46,8 @@ return [
     'failed' => 'Failed',
     'pending' => 'Pending',
     'sending' => 'Sending',
-    'account' => 'Account'
+    'account' => 'Account',
+    'taxPercentage' => 'Tax Percentage'
   ],
   'form' => [
     'elaborationDate' => 'Elaboration Date',

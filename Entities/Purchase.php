@@ -23,7 +23,9 @@ class Purchase extends CrudModel
       ['path' => 'Modules\Iaccounting\Events\PurchaseWasCreated']
     ],
     'creating' => [],
-    'updated' => [],
+    'updated' => [
+      ['path' => 'Modules\Iaccounting\Events\PurchaseWasUpdated']
+    ],
     'updating' => [],
     'deleting' => [],
     'deleted' => []

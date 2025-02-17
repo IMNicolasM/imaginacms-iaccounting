@@ -26,9 +26,17 @@ class CallWorkflow
     $origins = $originRepository->getItemsBy(json_decode(json_encode(['filter' => []])));
 
     $origin = $origins[0] ?? null;
+    $error = [
+      'code' => null,
+      'message' => null
+    ];
 
     if(!isset($origin)) {
       $updateData = ['status_id' => Status::FAILED];
+      $error = [
+        'code' => 500,
+        'message' => 'Origin not found'
+      ];
     }
 
     if($origin) {
@@ -49,6 +57,19 @@ class CallWorkflow
       $httpResponse = $service->dispatchWebhook(['attributes' => $attributes], ['extra_url' => '/accounting/purchases']);
       $status = $httpResponse['code'];
       $data = $httpResponse['response'];
+      if(isset($data->error) && isset($data->error->message)) {
+        //Decode error
+        $errorString = $data->error->message;
+        $jsonPart = substr($errorString, strpos($errorString, '{'), strrpos($errorString, '"') - strpos($errorString, '{'));
+        $jsonDecoded = stripslashes($jsonPart);
+        $errorObject = json_decode($jsonDecoded);
+        $error = (array)$errorObject->errors[0];
+      } elseif (isset($data->errors)) {
+        $error = [
+          'code' => 500,
+          'message' => 'Error not found'
+        ];
+      }
 
       $updateData = ['status_id' => Status::FAILED];
 
@@ -56,7 +77,7 @@ class CallWorkflow
         $updateData = ['status_id' => Status::SENDING];
       }
     }
-
+    $updateData['options'] = array_merge($model->options ?? [], ['error' => json_decode(json_encode($error))]);
     $model->update((array)$updateData);
   }
 }
