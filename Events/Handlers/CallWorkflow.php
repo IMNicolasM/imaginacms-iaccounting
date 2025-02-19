@@ -63,7 +63,14 @@ class CallWorkflow
         $jsonPart = substr($errorString, strpos($errorString, '{'), strrpos($errorString, '"') - strpos($errorString, '{'));
         $jsonDecoded = stripslashes($jsonPart);
         $errorObject = json_decode($jsonDecoded);
-        $error = (array)$errorObject->errors[0];
+        $errorsMsg = $errorObject->errors ?? $errorObject->Errors ?? [];
+        $firstError = $errorsMsg[0];
+        $error = [
+          'code' => $firstError->code ?? $firstError->Code ?? '',
+          'message' => $firstError->message ?? $firstError->Message ?? '',
+          'params' => $firstError->params ?? $firstError->Params ?? '',
+          'detail' => $firstError->detail ?? $firstError->Detail ?? ''
+        ];
       } elseif (isset($data->errors)) {
         $error = [
           'code' => 500,
